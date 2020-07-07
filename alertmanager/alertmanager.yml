@@ -1,0 +1,11 @@
+global:
+    #slack_api_url: 'https://api.slack.com/apps/A014XAHJ62C'
+route:
+  receiver: 'slack'
+receivers:
+  - name: 'slack'
+    slack_configs:
+      - send_resolved: true
+        username: 'Alert nsa'
+        channel: '#webhoot-test'
+        api_url: 'https://hooks.slack.com/services/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'

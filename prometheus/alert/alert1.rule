@@ -1,0 +1,25 @@
+groups:
+- name: example
+  rules:
+
+  - alert: InstanceDown
+    expr: up == 0
+    for: 5s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+
+
+- name: Database server alert
+  rules:
+
+  - alert: MemoryUsage
+    expr: 100 - ((node_memory_MemAvailable_bytes{group="db"} / node_memory_MemTotal_bytes{group="db"}) * 100) > 15
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      summary: "[DB] Memory usage over 15%"
+      description: "The memory usage is over 15% on the database server - Prometheus."
